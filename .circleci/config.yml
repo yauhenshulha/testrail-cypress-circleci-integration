@@ -1,0 +1,47 @@
+version: 2.1
+parameters:
+  testRunId:
+    type: string
+    default: ""
+  run_test_rail:
+    type: boolean
+    default: false
+
+executors:
+  ruby_and_services:
+    docker:
+      - image: circle-base:ruby-2.7.4-node-14.17.4
+
+jobs:
+  cypress_web_ui_chrome:
+    executor: ruby_and_services
+    steps:
+#      some_steps
+      - run:
+          name: Running Cypress Chrome Web UI Tests
+          command: npx cypress run
+
+  cypress_testrail:
+    executor: ruby_and_services
+    steps:
+#      some_steps
+      - run:
+          name: Running Cypress Chrome Testrail Tests
+          command: |
+            export TESTRAIL_RUN_ID="<< pipeline.parameters.testRunId >>"
+            echo "TestRail run id is << pipeline.parameters.testRunId >>"
+            npx cypress run --env grepTags=testrail
+
+workflows:
+  version: 2
+  build_and_test:
+    when:
+      and:
+        - equal: [ false, <<pipeline.parameters.run_test_rail>> ]
+    jobs:
+      - cypress_web_ui_chrome
+
+  testrail_regression:
+    when: <<pipeline.parameters.run_test_rail>>
+    jobs:
+      - cypress_testrail

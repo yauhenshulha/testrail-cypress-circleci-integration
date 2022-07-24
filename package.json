@@ -1,0 +1,10 @@
+{
+  "name": "testrail-cypress-circleci-integration",
+  "author": "https://www.linkedin.com/in/yauhenshulha/",
+  "license": "MIT",
+  "devDependencies": {
+    "cypress": "9.6.0",
+    "cypress-grep": "2.12.2",
+    "cypress-testrail-simple": "^3.0.0"
+  }
+}
