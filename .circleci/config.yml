@@ -10,13 +10,18 @@ parameters:
 executors:
   ruby_and_services:
     docker:
-      - image: circle-base:ruby-2.7.4-node-14.17.4
+      - image: cypress/browsers:node12.14.1-chrome85-ff81
 
 jobs:
   cypress_web_ui_chrome:
     executor: ruby_and_services
     steps:
-#      some_steps
+      - checkout
+      - run:
+          name: Installing Node Modules
+          command: |
+            yarn config set ignore-engines true
+            yarn install --frozen-lockfile
       - run:
           name: Running Cypress Chrome Web UI Tests
           command: npx cypress run
@@ -24,7 +29,12 @@ jobs:
   cypress_testrail:
     executor: ruby_and_services
     steps:
-#      some_steps
+      - checkout
+      - run:
+          name: Installing Node Modules
+          command: |
+            yarn config set ignore-engines true
+            yarn install --frozen-lockfile
       - run:
           name: Running Cypress Chrome Testrail Tests
           command: |
