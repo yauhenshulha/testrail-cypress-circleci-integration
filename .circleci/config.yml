@@ -40,7 +40,7 @@ jobs:
           command: |
             export TESTRAIL_RUN_ID="<< pipeline.parameters.testRunId >>"
             echo "TestRail run id is << pipeline.parameters.testRunId >>"
-            npx testrail-start-run --env grepTags=testrail
+            TESTRAIL_ENABLED=true npx cypress run --env grepTags=testrail
 
 workflows:
   version: 2
