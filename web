@@ -1,0 +1,56 @@
+name: Run Tests in CI
+version: 1.0
+includes: ^runs
+excludes: 
+
+js:
+$(document).ready(
+    function () {
+        var form = $(`
+        <div class="toolbar content-header-toolbar" style="display: flex;">
+        <form id="startCIForm">
+        <input type="number" placeholder="Fill in the Run ID" id="runIdField" style="border: 0; padding-left: 0.5rem; height:100%;" required/>
+        <input type="text" placeholder="Fill in the Branch" id="branchField" style="border: 0; padding-left: 0.5rem; height:100%; border-left:1px solid #AECADE" required/>
+        <button id="btnSubmit" type="submit" class="toolbar-button content-header-button button-responsive button-start" style="border:1px #AECADE; border-left:1px solid #AECADE">
+        Run Tests in CI
+        </button>
+        </form>
+        </div>
+        <div class="content-header-toolbar" style="display: flex; border:none; font-weight: bold; margin-top: 0.3rem;">
+        </div>
+        `)
+        $("#content-header .content-header-inner").prepend(form);
+        $('#startCIForm').submit(
+            function (event) {
+                event.preventDefault();
+                var branchField = $('#branchField');
+		            var runIdField = $('#runIdField');
+                // disabled the submit button
+                $("#btnSubmit").prop("disabled", true);
+                $.ajax(
+                    {
+                        url: 'https://cors-anywhere.herokuapp.com/https://circleci.com/api/v2/project/gh/yauhenshulha/testrail-cypress-circleci-integration/pipeline',
+                        dataType: 'json',
+                        type: 'POST',
+                        data: `{"branch":"${branchField.val()}","parameters": {"run_test_rail":true, "testRunId":"${runIdField.val()}"}}`,
+                        headers: {
+                            "X-Requested-With": "XMLHttpRequest",
+                            "Circle-Token": "ad5a49e66466ad55fd3b8f2ea2765f8ac5529031",
+                            "Content-Type": "application/json",
+                            "Accept": "application/json"
+                        },
+                        success: function (data, status, xhr) {
+                            branchField.val("");
+                            runIdField.val("");
+                            $("#btnSubmit").prop("disabled", false);
+                            if (window.confirm("\nCircleCI pipeline is triggered.\n\nClick OK to open CircleCI workflow in new tab, or Cancel to close modal.\n")) {
+                                window.open(`https://app.circleci.com/pipelines/github/yauhenshulha/testrail-cypress-circleci-integration/${JSON.stringify(data.number)}`, '_blank');
+                            };
+                        },
+                        error: function (xhr, status, error) {
+                            alert('\nCircleCI Error : '  + xhr.responseText.replace(/{"message":"/, "").replace(/"}/, ""));
+                        }
+                    });
+            }
+        );
+    });
