@@ -4,11 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e67b0a44-bd8d-41ef-921f-cdfab80ef11f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/cypress/screenshots/test.spec.js/Testrail -- C2 'httpswww.google.com' should contain '#test15' button (failed).png" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/screenshots/test.spec.js/Testrail -- C2 'httpswww.google.com' should contain '#test15' button (failed).png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/test.spec.js.mp4" beforeDir="false" afterPath="$PROJECT_DIR$/cypress/videos/test.spec.js.mp4" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cypress/videos/test1.spec.js.mp4" beforeDir="false" />
-    </list>
+    <list default="true" id="e67b0a44-bd8d-41ef-921f-cdfab80ef11f" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -58,7 +54,7 @@
       <option name="presentableId" value="Default" />
       <updated>1658665949477</updated>
       <workItem from="1658665950657" duration="9709000" />
-      <workItem from="1660125283465" duration="2807000" />
+      <workItem from="1660125283465" duration="3108000" />
     </task>
     <servers />
   </component>
