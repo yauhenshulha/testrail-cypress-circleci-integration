@@ -8,13 +8,13 @@ parameters:
     default: false
 
 executors:
-  ruby_and_services:
+  cypress_node:
     docker:
       - image: cypress/browsers:node12.14.1-chrome85-ff81
 
 jobs:
   cypress_web_ui_chrome:
-    executor: ruby_and_services
+    executor: cypress_node
     steps:
       - checkout
       - run:
@@ -27,7 +27,7 @@ jobs:
           command: npx cypress run
 
   cypress_testrail:
-    executor: ruby_and_services
+    executor: cypress_node
     steps:
       - checkout
       - run:
