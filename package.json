@@ -5,6 +5,6 @@
   "devDependencies": {
     "cypress": "9.6.0",
     "cypress-grep": "2.12.2",
-    "cypress-testrail-simple": "^3.0.0"
+    "cypress-testrail-simple": "3.0.0"
   }
 }
